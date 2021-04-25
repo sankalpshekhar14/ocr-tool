@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1> OCR Tool </h1>
+            <p>A tool to extract text from images.</p>
+        </div>
+        <h3>Select Image:</h3>
+        <input class="btn btn-danger" type="file" id="image_file" name="myfile" multiple>
+        <br>
+        <hr>
+        <button class="btn btn-success" onclick="performOCR()">Extract Text</button>
+        <br>
+    </div>
+</body>
+<script>
+    function performOCR(){
+        var files = document.getElementById("image_file").files;
+        var endpoint = "/extract_text";
+        var formdata=new FormData();
+        formdata.append("image",files[0])
+
+        $.ajax({
+            type: 'POST',
+            url: endpoint,
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data){
+                swal("Extracted Text", data.text)
+            }
+        });
+    }
+</script>
