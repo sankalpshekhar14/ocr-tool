@@ -12,7 +12,7 @@ async def read_image(file_path, lang='eng'):
     Returns
     :text: str, converted text after OCR is performed on the image
     """
-    
+    pytesseract.pytesseract.tesseract_cmd='/app/.apt/usr/bin/tesseract'
     try:
         return pytesseract.image_to_string(file_path, lang=lang)
     except:
