@@ -15,8 +15,8 @@ async def read_image(file_path, lang='eng'):
     pytesseract.pytesseract.tesseract_cmd='/app/.apt/usr/bin/tesseract'
     try:
         return pytesseract.image_to_string(file_path, lang=lang)
-    except:
-        return "[ERROR] Unable to process file: {0}".format(file_path)
+    except e:
+        return "[ERROR] Unable to process file: {e}".format(e)
 
 
 def read_images_from_dir(dir_path, lang='eng', write_to_file=False):
